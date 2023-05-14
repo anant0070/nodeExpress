@@ -25,3 +25,7 @@ app.use("/api/v1/task",taskRouter);
 
 
 app.use(errorMiddleware)
+
+app.get("/", (req, res) => {
+    res.send("Nice working");
+  });
