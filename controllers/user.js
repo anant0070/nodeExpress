@@ -11,12 +11,12 @@ export const login = async (req, res, next) => {
         const { email, password } = req.body;
 
         const user = await User.findOne({ email }).select("+password");
-        if (!user) return next(new ErrorHandler("invalid email or password", 400))
+        if (!user) return next(new ErrorHandler("invalid email or password", 400));
 
         const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) return next(new ErrorHandler("invalid email or password", 400))
+        if (!isMatch) return next(new ErrorHandler("invalid email or password", 400));
 
-        sendCookie(user, res, `Welcome ,${user.name}`, 200)
+        sendCookie(user, res, `Welcome ,${user.name}`, 200);
     } catch (error) {
         next(error)
     }
@@ -27,7 +27,7 @@ export const register = async (req, res) => {
         const { name, email, password } = req.body
 
         let user = await User.findOne({ email })
-        if (user) return next(new ErrorHandler("user already found", 400))
+        if (user) return next(new ErrorHandler("user already found", 400));
 
         const hashedPassword = await bcrypt.hash(password, 10);
         user = await User.create({ name, email, password: hashedPassword });

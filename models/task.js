@@ -3,20 +3,20 @@ import mongoose from "mongoose"
 const schema= new mongoose.Schema({
     title:{
         type:String,
-        required:true
+        required:true,
     },
     description:{
         type:String,
-        required:true
+        required:true,
     },
     isCompleted:{
         type:Boolean,
-        default:false
+        default:false,
     },
     user:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User",
-        required:true
+        required:true,
     },
     createdAt:{
         type:Date,
